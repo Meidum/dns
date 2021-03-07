@@ -18,7 +18,6 @@ import {
 } from '@elastic/eui';
 import {ApiUsers} from "../api";
 import Authentication from "../user";
-import {isMobile} from "../util";
 
 export default class extends Component {
     constructor(props) {
@@ -100,7 +99,7 @@ export default class extends Component {
                         </EuiPageContentHeader>
                         <EuiPageContentBody>
                             <EuiForm>
-                                <EuiFlexGroup stlye={{ maxWidth: 400 }}>
+                                <EuiFlexGroup>
                                     <EuiFlexItem grow={false}>
                                         <EuiFormRow label="Username:">
                                             <EuiFieldText value={this.state.username} readOnly/>
@@ -113,20 +112,20 @@ export default class extends Component {
                                     </EuiFlexItem>
                                 </EuiFlexGroup>
 
-                                <EuiFlexGroup style={{ maxWidth: 400 }}>
+                                <EuiFlexGroup>
                                     <EuiFlexItem grow={false}>
                                         <EuiFormRow label="Number of Logins:">
-                                            <EuiFieldNumber value={this.state.logins} readOnly style={{ width: (isMobile()) ? "100%" : 202 }}/>
+                                            <EuiFieldNumber value={this.state.logins} readOnly/>
                                         </EuiFormRow>
                                     </EuiFlexItem>
                                     <EuiFlexItem grow={false}>
                                         <EuiFormRow label="Name:">
-                                            <EuiFieldText name="name" value={this.state.name} onChange={this.onNameChange.bind(this)} style={{ width: (isMobile()) ? "100%" : 202 }}/>
+                                            <EuiFieldText name="name" value={this.state.name} onChange={this.onNameChange.bind(this)}/>
                                         </EuiFormRow>
                                     </EuiFlexItem>
                                 </EuiFlexGroup>
 
-                                <EuiFlexGroup stlye={{ maxWidth: 400 }}>
+                                <EuiFlexGroup>
                                     <EuiFlexItem grow={false}>
                                         <EuiFormRow label="Password:" isInvalid={this.state.password !== this.state.passwordConf} error={["Passwords must match"]}>
                                             <EuiFieldText value={this.state.password} onChange={this.onPasswordChange.bind(this)} type="password"/>
