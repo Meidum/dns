@@ -2,3 +2,4 @@ records.db
 dns.exe
 dns
 config.yaml
+docker-compose.yml
