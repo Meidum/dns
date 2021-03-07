@@ -11,8 +11,8 @@ FROM golang:1.12-stretch AS server-build
 
 RUN go get github.com/GeertJohan/go.rice && go get github.com/GeertJohan/go.rice/rice
 
-RUN mkdir -p src/github.com/akrantz01/krantz.dev/dns/frontend/build
-WORKDIR src/github.com/akrantz01/krantz.dev/dns
+RUN mkdir -p src/github.com/meidum/dns/frontend/build
+WORKDIR src/github.com/meidum/dns
 
 COPY --from=frontend-build build frontend/build
 COPY db ./db
