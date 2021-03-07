@@ -52,10 +52,10 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		util.Responses.Error(w, http.StatusBadRequest, "failed to decode body: "+err.Error())
 		return
 	} else if err, _ := util.ValidateBody(body, []string{"name", "username", "password", "role"}, map[string]map[string]string{
-		"name": {"type": "string", "required": "true"},
+		"name":     {"type": "string", "required": "true"},
 		"username": {"type": "string", "required": "true"},
 		"password": {"type": "string", "required": "true"},
-		"role": {"type": "string", "required": "true"},
+		"role":     {"type": "string", "required": "true"},
 	}); err != "" {
 		util.Responses.Error(w, http.StatusBadRequest, err)
 		return

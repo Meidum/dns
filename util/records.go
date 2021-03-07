@@ -47,7 +47,7 @@ func parseSizePrecision(p string, d uint8) (uint8, bool) {
 	// Here both f and exponent will be in the range 0 to 9 and these
 	// get packed into a byte in the following manner. The result?
 	// Look at the value in hex and you can read it. e.g. 6e3 (i.e. 6000) is 0x63
-	return uint8(f) << 4 + exponent, true
+	return uint8(f)<<4 + exponent, true
 }
 
 // parseLatLong parses a latitude/longitude string (see ParseString
@@ -81,7 +81,7 @@ func parseLatLong(d, m, s string, limit uint64) (uint32, bool) {
 
 	pos *= 1000
 
-	return uint32(pos), pos <= float64(limit * dns.LOC_DEGREES)
+	return uint32(pos), pos <= float64(limit*dns.LOC_DEGREES)
 }
 
 // parseLOCString parses the string representation of a LOC record and

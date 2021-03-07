@@ -5,7 +5,7 @@ import (
 )
 
 func (d deleteRecord) A(qname string) error {
-	return  d.Db.Update(func(tx *bolt.Tx) error {
+	return d.Db.Update(func(tx *bolt.Tx) error {
 		return tx.Bucket([]byte("A")).Delete([]byte(qname))
 	})
 }

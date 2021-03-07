@@ -8,7 +8,8 @@ import (
 )
 
 var Responses = responses{}
-type responses struct {}
+
+type responses struct{}
 
 // Return a generic success
 func (r responses) Success(w http.ResponseWriter) {

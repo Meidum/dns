@@ -19,15 +19,15 @@ func NewToken(user User, db *bolt.DB) (string, error) {
 	// Generate key
 	signingKey := make([]byte, 128)
 	if _, err := rand.Read(signingKey); err != nil {
-		return "", fmt.Errorf("failed to generate JWT signing key: "+err.Error())
+		return "", fmt.Errorf("failed to generate JWT signing key: " + err.Error())
 	}
 
 	// Create claims
 	claims := &jwt.StandardClaims{
-		ExpiresAt: time.Now().Unix() + (60*60*24),
-		Issuer: "dns.krantz.dev",
-		IssuedAt: time.Now().Unix(),
-		Subject: user.Username,
+		ExpiresAt: time.Now().Unix() + (60 * 60 * 24),
+		Issuer:    "dns.krantz.dev",
+		IssuedAt:  time.Now().Unix(),
+		Subject:   user.Username,
 	}
 
 	// Generate token
@@ -44,7 +44,7 @@ func NewToken(user User, db *bolt.DB) (string, error) {
 	// Encode to JSON
 	t := Token{
 		SigningKey: base64.StdEncoding.EncodeToString(signingKey),
-		Username: user.Username,
+		Username:   user.Username,
 	}
 	j, err := json.Marshal(t)
 	if err != nil {

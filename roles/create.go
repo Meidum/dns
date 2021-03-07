@@ -52,10 +52,10 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		return
 	}
 	validationErr, valid := util.ValidateBody(body, []string{"name", "description", "allow", "deny"}, map[string]map[string]string{
-		"name": {"type": "string", "required": "true"},
+		"name":        {"type": "string", "required": "true"},
 		"description": {"type": "string", "required": "true"},
-		"allow": {"type": "string", "required": "false"},
-		"deny": {"type": "string", "required": "false"},
+		"allow":       {"type": "string", "required": "false"},
+		"deny":        {"type": "string", "required": "false"},
 	})
 	if validationErr != "" {
 		util.Responses.Error(w, http.StatusBadRequest, validationErr)

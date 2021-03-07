@@ -53,9 +53,9 @@ func update(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		return
 	}
 	validationErr, valid := util.ValidateBody(body, []string{"name", "password", "role"}, map[string]map[string]string{
-		"name": {"type": "string", "required": "false"},
+		"name":     {"type": "string", "required": "false"},
 		"password": {"type": "string", "required": "false"},
-		"role": {"type": "string", "required": "false"},
+		"role":     {"type": "string", "required": "false"},
 	})
 	if validationErr != "" {
 		util.Responses.Error(w, http.StatusBadRequest, validationErr)

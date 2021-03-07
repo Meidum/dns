@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	rice "github.com/GeertJohan/go.rice"
+	"github.com/gorilla/handlers"
 	"github.com/meidum/dns/db"
 	"github.com/meidum/dns/records"
 	"github.com/meidum/dns/roles"
 	"github.com/meidum/dns/users"
 	"github.com/meidum/dns/util"
-	"github.com/gorilla/handlers"
 	"github.com/miekg/dns"
 	"github.com/rs/cors"
 	"github.com/spf13/pflag"
@@ -24,7 +24,8 @@ import (
 
 var database *bolt.DB
 
-type handler struct {}
+type handler struct{}
+
 func (h *handler) ServeDNS(w dns.ResponseWriter, m *dns.Msg) {
 	// Set database into getter and setter
 	db.Get.Db = database
@@ -53,56 +54,56 @@ func (h *handler) ServeDNS(w dns.ResponseWriter, m *dns.Msg) {
 				r.Answer = append(r.Answer, &dns.A{Hdr: hdr, A: record.Address})
 			}
 		case dns.TypeAAAA:
-			record :=  db.Get.AAAA(q.Name)
+			record := db.Get.AAAA(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.AAAA{Hdr: hdr, AAAA: record.Address})
 			}
 		case dns.TypeCNAME:
-			record :=  db.Get.CNAME(q.Name)
+			record := db.Get.CNAME(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.CNAME{Hdr: hdr, Target: record.Target})
 			}
 		case dns.TypeMX:
-			record :=  db.Get.MX(q.Name)
+			record := db.Get.MX(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.MX{Hdr: hdr, Preference: record.Priority, Mx: record.Host})
 			}
 		case dns.TypeLOC:
-			record :=  db.Get.LOC(q.Name)
+			record := db.Get.LOC(q.Name)
 			if record != nil {
 				recordFound = true
 				locString, vers := record.ToParsable()
 				r.Answer = append(r.Answer, util.ParseLOCString(locString, vers, hdr))
 			}
 		case dns.TypeSRV:
-			record :=  db.Get.SRV(q.Name)
+			record := db.Get.SRV(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.SRV{Hdr: hdr, Priority: record.Priority, Weight: record.Weight, Port: record.Port, Target: record.Target})
 			}
 		case dns.TypeSPF:
-			record :=  db.Get.SPF(q.Name)
+			record := db.Get.SPF(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.SPF{Hdr: hdr, Txt: record.Text})
 			}
 		case dns.TypeTXT:
-			record :=  db.Get.TXT(q.Name)
+			record := db.Get.TXT(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.TXT{Hdr: hdr, Txt: record.Text})
 			}
 		case dns.TypeNS:
-			record :=  db.Get.NS(q.Name)
+			record := db.Get.NS(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.NS{Hdr: hdr, Ns: record.Nameserver})
 			}
 		case dns.TypeCAA:
-			record :=  db.Get.CAA(q.Name)
+			record := db.Get.CAA(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.CAA{Hdr: hdr, Flag: record.Flag, Tag: record.Tag, Value: record.Content})
@@ -114,49 +115,49 @@ func (h *handler) ServeDNS(w dns.ResponseWriter, m *dns.Msg) {
 				r.Answer = append(r.Answer, &dns.PTR{Hdr: hdr, Ptr: record.Domain})
 			}
 		case dns.TypeCERT:
-			record :=  db.Get.CERT(q.Name)
+			record := db.Get.CERT(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.CERT{Hdr: hdr, Type: record.Type, KeyTag: record.KeyTag, Algorithm: record.Algorithm, Certificate: record.Certificate})
 			}
 		case dns.TypeDNSKEY:
-			record :=  db.Get.DNSKEY(q.Name)
+			record := db.Get.DNSKEY(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.DNSKEY{Hdr: hdr, Flags: record.Flags, Protocol: record.Protocol, Algorithm: record.Algorithm, PublicKey: record.PublicKey})
 			}
 		case dns.TypeDS:
-			record :=  db.Get.DS(q.Name)
+			record := db.Get.DS(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.DS{Hdr: hdr, KeyTag: record.KeyTag, Algorithm: record.Algorithm, DigestType: record.DigestType, Digest: record.Digest})
 			}
 		case dns.TypeNAPTR:
-			record :=  db.Get.NAPTR(q.Name)
+			record := db.Get.NAPTR(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.NAPTR{Hdr: hdr, Order: record.Order, Preference: record.Preference, Flags: record.Flags, Service: record.Service, Regexp: record.Regexp, Replacement: record.Replacement})
 			}
 		case dns.TypeSMIMEA:
-			record :=  db.Get.SMIMEA(q.Name)
+			record := db.Get.SMIMEA(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.SMIMEA{Hdr: hdr, Usage: record.Usage, Selector: record.Selector, MatchingType: record.MatchingType, Certificate: record.Certificate})
 			}
 		case dns.TypeSSHFP:
-			record :=  db.Get.SSHFP(q.Name)
+			record := db.Get.SSHFP(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.SSHFP{Hdr: hdr, Algorithm: record.Algorithm, Type: record.Type, FingerPrint: record.Fingerprint})
 			}
 		case dns.TypeTLSA:
-			record :=  db.Get.TLSA(q.Name)
+			record := db.Get.TLSA(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.TLSA{Hdr: hdr, Usage: record.Usage, Selector: record.Selector, MatchingType: record.MatchingType, Certificate: record.Certificate})
 			}
 		case dns.TypeURI:
-			record :=  db.Get.URI(q.Name)
+			record := db.Get.URI(q.Name)
 			if record != nil {
 				recordFound = true
 				r.Answer = append(r.Answer, &dns.URI{Hdr: hdr, Priority: record.Priority, Weight: record.Weight, Target: record.Target})
@@ -228,7 +229,9 @@ func main() {
 
 	// Setup environment variables
 	viper.SetEnvPrefix("dns")
-	if err := viper.BindEnv("host", "port", "database", "tcp", "udp"); err != nil { log.Fatalf("Failed to setup environment variables: %v", err) }
+	if err := viper.BindEnv("host", "port", "database", "tcp", "udp"); err != nil {
+		log.Fatalf("Failed to setup environment variables: %v", err)
+	}
 
 	// Setup command line
 	flag.String("dns.host", "127.0.0.1", "IP address to run the DNS server on")
@@ -245,7 +248,9 @@ func main() {
 	flag.Bool("http.frontend", false, "Disable React frontend")
 	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
 	pflag.Parse()
-	if err := viper.BindPFlags(pflag.CommandLine); err != nil { log.Fatalf("Failed to setup command line arguments: %v", err) }
+	if err := viper.BindPFlags(pflag.CommandLine); err != nil {
+		log.Fatalf("Failed to setup command line arguments: %v", err)
+	}
 
 	// Set configuration defaults
 	viper.SetDefault("dns.host", "127.0.0.1")
@@ -279,7 +284,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to open database: %v", err)
 	}
-	defer func() { if err := database.Close(); err != nil { log.Fatalf("Failed to close database: %v", err) }}()
+	defer func() {
+		if err := database.Close(); err != nil {
+			log.Fatalf("Failed to close database: %v", err)
+		}
+	}()
 
 	// Setup database structure
 	if err := db.Setup(database); err != nil {
@@ -292,32 +301,44 @@ func main() {
 	}
 
 	// Check config is valid
-	if viper.GetBool("dns.disable-tcp") && viper.GetBool("dns.disable-udp") { log.Fatalf("Invalid configuration: tcp and/or udp must be enabled, got both as disabled") }
+	if viper.GetBool("dns.disable-tcp") && viper.GetBool("dns.disable-udp") {
+		log.Fatalf("Invalid configuration: tcp and/or udp must be enabled, got both as disabled")
+	}
 
 	// Handle TCP connections
 	tcpErr := make(chan error)
 	go func() {
-		if viper.GetBool("dns.disable-tcp") { return }
+		if viper.GetBool("dns.disable-tcp") {
+			return
+		}
 		tcp := &dns.Server{Addr: viper.GetString("dns.host") + ":" + viper.GetString("dns.port"), Net: "tcp"}
 		tcp.Handler = &handler{}
 
-		if err := tcp.ListenAndServe(); err != nil { tcpErr <- err }
+		if err := tcp.ListenAndServe(); err != nil {
+			tcpErr <- err
+		}
 	}()
 
 	// Handle UDP connections
 	udpErr := make(chan error)
 	go func() {
-		if viper.GetBool("dns.disable-udp") { return }
+		if viper.GetBool("dns.disable-udp") {
+			return
+		}
 		udp := &dns.Server{Addr: viper.GetString("dns.host") + ":" + viper.GetString("dns.port"), Net: "udp"}
 		udp.Handler = &handler{}
 
-		if err := udp.ListenAndServe(); err != nil { udpErr <- err }
+		if err := udp.ListenAndServe(); err != nil {
+			udpErr <- err
+		}
 	}()
 
 	// Handle REST API
 	httpErr := make(chan error)
 	go func() {
-		if viper.GetBool("http.disabled") { return }
+		if viper.GetBool("http.disabled") {
+			return
+		}
 
 		// Allow CORS
 		c := cors.AllowAll()
@@ -338,7 +359,9 @@ func main() {
 		}
 
 		// Start HTTP
-		if err := http.ListenAndServe(viper.GetString("http.host") + ":" + viper.GetString("http.port"), nil); err != nil { httpErr <- err }
+		if err := http.ListenAndServe(viper.GetString("http.host")+":"+viper.GetString("http.port"), nil); err != nil {
+			httpErr <- err
+		}
 	}()
 
 	// Assemble log
@@ -352,15 +375,17 @@ func main() {
 	}
 	log.Printf("DNS server listening on %s:%s with %s...", viper.GetString("dns.host"), viper.GetString("dns.port"), protocols)
 
-	if !viper.GetBool("http.disabled") { log.Printf("HTTP server listening on %s:%s...", viper.GetString("http.host"), viper.GetString("http.port")) }
+	if !viper.GetBool("http.disabled") {
+		log.Printf("HTTP server listening on %s:%s...", viper.GetString("http.host"), viper.GetString("http.port"))
+	}
 
 	// Watch for errors
 	select {
-	case err := <- tcpErr:
+	case err := <-tcpErr:
 		log.Fatalf("DNS failed to listen on %s:%s with TCP: %v\n", viper.GetString("dns.host"), viper.GetString("dns.port"), err)
-	case err := <- udpErr:
+	case err := <-udpErr:
 		log.Fatalf("DNS failed to listen on %s:%s with UDP: %v\n", viper.GetString("dns.host"), viper.GetString("dns.port"), err)
-	case err := <- httpErr:
+	case err := <-httpErr:
 		log.Fatalf("API failed to listen on %s:%s: %v\n", viper.GetString("http.host"), viper.GetString("http.port"), err)
 	}
 }

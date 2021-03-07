@@ -31,7 +31,7 @@ func SingleRecordHandler(path string, db *bolt.DB) func(w http.ResponseWriter, r
 			read(w, r, path, db)
 			return
 		case "PUT":
-			update(w, r, path,  db)
+			update(w, r, path, db)
 			return
 		case "DELETE":
 			deleteRecord(w, r, path, db)

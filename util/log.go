@@ -17,7 +17,7 @@ func LogResponse(w dns.ResponseWriter, r *dns.Msg, start time.Time) {
 		convertRemote(state.IP()), state.Port(), strconv.Itoa(int(state.Req.Id)),
 		state.Type(), state.Class(), state.Name(), state.Proto(),
 		strconv.Itoa(state.Req.Len()), boolToString(state.Do()), strconv.Itoa(state.Size()),
-		getRCode(r), getRFlags(r), getRSize(r), strconv.FormatFloat(time.Since(start).Seconds(), 'f', -1, 64) + "s",
+		getRCode(r), getRFlags(r), getRSize(r), strconv.FormatFloat(time.Since(start).Seconds(), 'f', -1, 64)+"s",
 		time.Now().Format("2006-01-02 15:04:05"))
 }
 
@@ -29,7 +29,9 @@ func convertRemote(addr string) string {
 }
 
 func boolToString(b bool) string {
-	if b { return "true" }
+	if b {
+		return "true"
+	}
 	return "false"
 }
 

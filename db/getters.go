@@ -21,7 +21,7 @@ func (g get) A(qname string) *A {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve A record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(a.Address) == 0 {
 		return nil
 	}
@@ -41,7 +41,7 @@ func (g get) AAAA(qname string) *AAAA {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve AAAA record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(a.Address) == 0 {
 		return nil
 	}
@@ -61,7 +61,7 @@ func (g get) CNAME(qname string) *CNAME {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve CNAME record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(c.Target) == 0 {
 		return nil
 	}
@@ -85,7 +85,7 @@ func (g get) MX(qname string) *MX {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve MX record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(m.Host) == 0 {
 		return nil
 	}
@@ -142,7 +142,7 @@ func (g get) LOC(qname string) *LOC {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve LOC record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(l.LongDirection) == 0 && len(l.LatDirection) == 0 {
 		return nil
 	}
@@ -172,7 +172,7 @@ func (g get) SRV(qname string) *SRV {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve SRV record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(s.Target) == 0 {
 		return nil
 	}
@@ -194,7 +194,7 @@ func (g get) SPF(qname string) *SPF {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve SPF record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(content) == 0 {
 		return nil
 	}
@@ -225,7 +225,7 @@ func (g get) TXT(qname string) *TXT {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve TXT record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(content) == 0 {
 		return nil
 	}
@@ -254,7 +254,7 @@ func (g get) NS(qname string) *NS {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve NS record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(n.Nameserver) == 0 {
 		return nil
 	}
@@ -278,7 +278,7 @@ func (g get) CAA(qname string) *CAA {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve CAA record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(c.Content) == 0 {
 		return nil
 	}
@@ -298,7 +298,7 @@ func (g get) PTR(qname string) *PTR {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve PTR record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(p.Domain) == 0 {
 		return nil
 	}
@@ -328,7 +328,7 @@ func (g get) CERT(qname string) *CERT {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve CERT record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(c.Certificate) == 0 {
 		return nil
 	}
@@ -358,7 +358,7 @@ func (g get) DNSKEY(qname string) *DNSKEY {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve DNSKEY record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(d.PublicKey) == 0 {
 		return nil
 	}
@@ -388,7 +388,7 @@ func (g get) DS(qname string) *DS {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve DS record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(d.Digest) == 0 {
 		return nil
 	}
@@ -424,7 +424,7 @@ func (g get) NAPTR(qname string) *NAPTR {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve NAPTR record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(n.Replacement) == 0 {
 		return nil
 	}
@@ -454,7 +454,7 @@ func (g get) SMIMEA(qname string) *SMIMEA {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve SMIMEA record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(s.Certificate) == 0 {
 		return nil
 	}
@@ -481,7 +481,7 @@ func (g get) SSHFP(qname string) *SSHFP {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve SSHFP record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(s.Fingerprint) == 0 {
 		return nil
 	}
@@ -511,7 +511,7 @@ func (g get) TLSA(qname string) *TLSA {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve TLSA record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(t.Certificate) == 0 {
 		return nil
 	}
@@ -538,7 +538,7 @@ func (g get) URI(qname string) *URI {
 		return nil
 	}); err != nil {
 		log.Printf("Failed to retrieve URI record for '%s': %v", qname, err)
-        return nil
+		return nil
 	} else if len(u.Target) == 0 {
 		return nil
 	}

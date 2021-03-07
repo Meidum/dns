@@ -188,19 +188,19 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"version", "size", "horizontal-precision", "vertical-precision", "altitude", "lat-degrees", "lat-minutes", "lat-seconds", "lat-direction", "long-degrees", "long-minutes", "long-seconds", "long-direction"}, map[string]map[string]string{
-			"version": {"type": "uint8", "required": "true"},
-			"size": {"type": "uint8", "required": "true"},
+			"version":              {"type": "uint8", "required": "true"},
+			"size":                 {"type": "uint8", "required": "true"},
 			"horizontal-precision": {"type": "uint8", "required": "true"},
-			"vertical-precision": {"type": "uint8", "required": "true"},
-			"altitude": {"type": "uint32", "required": "true"},
-			"lat-degrees": {"type": "uint8", "required": "true", "min": "0", "max": "90"},
-			"lat-minutes": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"lat-seconds": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"lat-direction": {"type": "string", "required": "true", "oneOf": "N,S"},
-			"long-degrees": {"type": "uint8", "required": "true", "min": "0", "max": "180"},
-			"long-minutes": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"long-seconds": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"long-direction": {"type": "string", "required": "true", "oneOf": "E,W"},
+			"vertical-precision":   {"type": "uint8", "required": "true"},
+			"altitude":             {"type": "uint32", "required": "true"},
+			"lat-degrees":          {"type": "uint8", "required": "true", "min": "0", "max": "90"},
+			"lat-minutes":          {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"lat-seconds":          {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"lat-direction":        {"type": "string", "required": "true", "oneOf": "N,S"},
+			"long-degrees":         {"type": "uint8", "required": "true", "min": "0", "max": "180"},
+			"long-minutes":         {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"long-seconds":         {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"long-direction":       {"type": "string", "required": "true", "oneOf": "E,W"},
 		})
 		if err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -265,9 +265,9 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"priority", "weight", "port", "target"}, map[string]map[string]string{
 			"priority": {"type": "uint16", "required": "false"},
-			"weight": {"type": "uint16", "required": "false"},
-			"port": {"type": "uint16", "required": "false"},
-			"target": {"type": "string", "required": "false"},
+			"weight":   {"type": "uint16", "required": "false"},
+			"port":     {"type": "uint16", "required": "false"},
+			"target":   {"type": "string", "required": "false"},
 		})
 		if err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -370,7 +370,7 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Write updated values to database
 		if err := db.Set.NS(recordName, record.Nameserver); err != nil {
-			util.Responses.Error(w, http.StatusInternalServerError, "failed to write record to database: "+ err.Error())
+			util.Responses.Error(w, http.StatusInternalServerError, "failed to write record to database: "+err.Error())
 			return
 		}
 
@@ -398,7 +398,7 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Write updated values to database
 		if err := db.Set.CAA(recordName, record.Tag, record.Content); err != nil {
-			util.Responses.Error(w, http.StatusInternalServerError, "failed to write record to database: "+ err.Error())
+			util.Responses.Error(w, http.StatusInternalServerError, "failed to write record to database: "+err.Error())
 			return
 		}
 
@@ -423,7 +423,7 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Write updated values to database
 		if err := db.Set.PTR(recordName, record.Domain); err != nil {
-			util.Responses.Error(w, http.StatusInternalServerError, "failed to write record to database: "+ err.Error())
+			util.Responses.Error(w, http.StatusInternalServerError, "failed to write record to database: "+err.Error())
 			return
 		}
 
@@ -437,9 +437,9 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"c-type", "key-tag", "algorithm", "certificate"}, map[string]map[string]string{
-			"c-type": {"type": "uint16", "requried": "false"},
-			"key-tag": {"type": "uint16", "required": "false"},
-			"algorithm": {"type": "uint8", "required": "false"},
+			"c-type":      {"type": "uint16", "requried": "false"},
+			"key-tag":     {"type": "uint16", "required": "false"},
+			"algorithm":   {"type": "uint8", "required": "false"},
 			"certificate": {"type": "string", "required": "false"},
 		})
 		if err != "" {
@@ -476,9 +476,9 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"flags", "protocol", "algorithm", "public-key"}, map[string]map[string]string{
-			"flags": {"type": "uint16", "required": "false"},
-			"protocol": {"type": "uint8", "required": "false"},
-			"algorithm": {"type": "uint8", "required": "false"},
+			"flags":      {"type": "uint16", "required": "false"},
+			"protocol":   {"type": "uint8", "required": "false"},
+			"algorithm":  {"type": "uint8", "required": "false"},
 			"public-key": {"type": "string", "required": "false"},
 		})
 		if err != "" {
@@ -515,10 +515,10 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"key-tag", "algorithm", "digest-type", "digest"}, map[string]map[string]string{
-			"key-tag": {"type": "uint16", "required": "false"},
-			"algorithm": {"type": "uint8", "required": "false"},
+			"key-tag":     {"type": "uint16", "required": "false"},
+			"algorithm":   {"type": "uint8", "required": "false"},
 			"digest-type": {"type": "uint8", "required": "false"},
-			"digest": {"type": "string", "required": "false"},
+			"digest":      {"type": "string", "required": "false"},
 		})
 		if err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -554,11 +554,11 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"order", "preference", "flags", "service", "regexp", "replacement"}, map[string]map[string]string{
-			"order": {"type": "uint16", "required": "false"},
-			"preference": {"type": "uint16", "required": "false"},
-			"flags": {"type": "string", "required": "false"},
-			"service": {"type": "string", "required": "false"},
-			"regexp": {"type": "string", "required": "false"},
+			"order":       {"type": "uint16", "required": "false"},
+			"preference":  {"type": "uint16", "required": "false"},
+			"flags":       {"type": "string", "required": "false"},
+			"service":     {"type": "string", "required": "false"},
+			"regexp":      {"type": "string", "required": "false"},
 			"replacement": {"type": "string", "required": "false"},
 		})
 		if err != "" {
@@ -601,10 +601,10 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"usage", "selector", "matching-type", "certificate"}, map[string]map[string]string{
-			"usage": {"type": "uint8", "required": "false"},
-			"selector": {"type": "uint8", "required": "false"},
+			"usage":         {"type": "uint8", "required": "false"},
+			"selector":      {"type": "uint8", "required": "false"},
 			"matching-type": {"type": "uint8", "required": "false"},
-			"certificate": {"type": "string", "required": "false"},
+			"certificate":   {"type": "string", "required": "false"},
 		})
 		if err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -640,8 +640,8 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"algorithm", "s-type", "fingerprint"}, map[string]map[string]string{
-			"algorithm": {"type": "uint8", "required": "false"},
-			"s-type": {"type": "uint8", "required": "false"},
+			"algorithm":   {"type": "uint8", "required": "false"},
+			"s-type":      {"type": "uint8", "required": "false"},
 			"fingerprint": {"type": "string", "required": "false"},
 		})
 		if err != "" {
@@ -675,10 +675,10 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"usage", "selector", "matching-type", "certificate"}, map[string]map[string]string{
-			"usage": {"type": "uint8", "required": "false"},
-			"selector": {"type": "uint8", "required": "false"},
+			"usage":         {"type": "uint8", "required": "false"},
+			"selector":      {"type": "uint8", "required": "false"},
 			"matching-type": {"type": "uint8", "required": "false"},
-			"certificate": {"type": "string", "required": "false"},
+			"certificate":   {"type": "string", "required": "false"},
 		})
 		if err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -715,8 +715,8 @@ func update(w http.ResponseWriter, r *http.Request, path string, database *bolt.
 		// Get valid values in body
 		err, valid := util.ValidateBody(body, []string{"priority", "weight", "target"}, map[string]map[string]string{
 			"priority": {"type": "uint16", "required": "false"},
-			"weight": {"type": "uint16", "required": "false"},
-			"target": {"type": "string", "requried": "false"},
+			"weight":   {"type": "uint16", "required": "false"},
+			"target":   {"type": "string", "requried": "false"},
 		})
 		if err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)

@@ -18,7 +18,7 @@ func (s set) AAAA(name, host string) error {
 	})
 }
 
-func (s set)CNAME(name, target string) error {
+func (s set) CNAME(name, target string) error {
 	return s.Db.Update(func(tx *bolt.Tx) error {
 		return tx.Bucket([]byte("CNAME")).Put([]byte(name), []byte(target))
 	})
@@ -33,10 +33,10 @@ func (s set) MX(name string, priority uint16, host string) error {
 		binary.BigEndian.PutUint16(p, priority)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*priority"), p); err != nil {
+		if err := records.Put([]byte(name+"*priority"), p); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*host"), []byte(host)); err != nil {
+		if err := records.Put([]byte(name+"*host"), []byte(host)); err != nil {
 			return err
 		}
 
@@ -53,43 +53,43 @@ func (s set) LOC(name string, version, size, horizontal, vertical uint8, altitud
 		binary.BigEndian.PutUint32(alt, altitude)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*version"), []byte{version}); err != nil {
+		if err := records.Put([]byte(name+"*version"), []byte{version}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*size"), []byte{size}); err != nil {
+		if err := records.Put([]byte(name+"*size"), []byte{size}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*horiz"), []byte{horizontal}); err != nil {
+		if err := records.Put([]byte(name+"*horiz"), []byte{horizontal}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*vert"), []byte{vertical}); err != nil {
+		if err := records.Put([]byte(name+"*vert"), []byte{vertical}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*alt"), alt); err != nil {
+		if err := records.Put([]byte(name+"*alt"), alt); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*lat-degrees"), []byte{latDegrees}); err != nil {
+		if err := records.Put([]byte(name+"*lat-degrees"), []byte{latDegrees}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*lat-minutes"), []byte{latMinutes}); err != nil {
+		if err := records.Put([]byte(name+"*lat-minutes"), []byte{latMinutes}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*lat-seconds"), []byte{latSeconds}); err != nil {
+		if err := records.Put([]byte(name+"*lat-seconds"), []byte{latSeconds}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*lat-direction"), []byte(latDirection)); err != nil {
+		if err := records.Put([]byte(name+"*lat-direction"), []byte(latDirection)); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*long-degrees"), []byte{longDegrees}); err != nil {
+		if err := records.Put([]byte(name+"*long-degrees"), []byte{longDegrees}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*long-minutes"), []byte{longMinutes}); err != nil {
+		if err := records.Put([]byte(name+"*long-minutes"), []byte{longMinutes}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*long-seconds"), []byte{longSeconds}); err != nil {
+		if err := records.Put([]byte(name+"*long-seconds"), []byte{longSeconds}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*long-direction"), []byte(longDirection)); err != nil {
+		if err := records.Put([]byte(name+"*long-direction"), []byte(longDirection)); err != nil {
 			return err
 		}
 
@@ -110,16 +110,16 @@ func (s set) SRV(name string, priority, weight, port uint16, target string) erro
 		binary.BigEndian.PutUint16(por, port)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*priority"), pri); err != nil {
+		if err := records.Put([]byte(name+"*priority"), pri); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*weight"), wei); err != nil {
+		if err := records.Put([]byte(name+"*weight"), wei); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*port"), por); err != nil {
+		if err := records.Put([]byte(name+"*port"), por); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*target"), []byte(target)); err != nil {
+		if err := records.Put([]byte(name+"*target"), []byte(target)); err != nil {
 			return err
 		}
 
@@ -163,10 +163,10 @@ func (s set) CAA(name, tag, content string) error {
 	return s.Db.Update(func(tx *bolt.Tx) error {
 		records := tx.Bucket([]byte("CAA"))
 
-		if err := records.Put([]byte(name + "*tag"), []byte(tag)); err != nil {
+		if err := records.Put([]byte(name+"*tag"), []byte(tag)); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*content"), []byte(content)); err != nil {
+		if err := records.Put([]byte(name+"*content"), []byte(content)); err != nil {
 			return err
 		}
 
@@ -191,16 +191,16 @@ func (s set) CERT(name string, tpe, keytag uint16, algorithm uint8, certificate 
 		binary.BigEndian.PutUint16(keta, keytag)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*type"), ty); err != nil {
+		if err := records.Put([]byte(name+"*type"), ty); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*keytag"), keta); err != nil {
+		if err := records.Put([]byte(name+"*keytag"), keta); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*algorithm"), []byte{algorithm}); err != nil {
+		if err := records.Put([]byte(name+"*algorithm"), []byte{algorithm}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*certificate"), []byte(certificate)); err != nil {
+		if err := records.Put([]byte(name+"*certificate"), []byte(certificate)); err != nil {
 			return err
 		}
 
@@ -217,16 +217,16 @@ func (s set) DNSKEY(name string, flags uint16, protocol, algorithm uint8, public
 		binary.BigEndian.PutUint16(flgs, flags)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*flags"), flgs); err != nil {
+		if err := records.Put([]byte(name+"*flags"), flgs); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*protocol"), []byte{protocol}); err != nil {
+		if err := records.Put([]byte(name+"*protocol"), []byte{protocol}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*algorithm"), []byte{algorithm}); err != nil {
+		if err := records.Put([]byte(name+"*algorithm"), []byte{algorithm}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*publickey"), []byte(publickey)); err != nil {
+		if err := records.Put([]byte(name+"*publickey"), []byte(publickey)); err != nil {
 			return err
 		}
 
@@ -243,16 +243,16 @@ func (s set) DS(name string, keytag uint16, algorithm, digesttype uint8, digest 
 		binary.BigEndian.PutUint16(keta, keytag)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*keytag"), keta); err != nil {
+		if err := records.Put([]byte(name+"*keytag"), keta); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*algorithm"), []byte{algorithm}); err != nil {
+		if err := records.Put([]byte(name+"*algorithm"), []byte{algorithm}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*digesttype"), []byte{digesttype}); err != nil {
+		if err := records.Put([]byte(name+"*digesttype"), []byte{digesttype}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*digest"), []byte(digest)); err != nil {
+		if err := records.Put([]byte(name+"*digest"), []byte(digest)); err != nil {
 			return err
 		}
 
@@ -271,22 +271,22 @@ func (s set) NAPTR(name string, order, preference uint16, flags, service, regexp
 		binary.BigEndian.PutUint16(pref, preference)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*order"), ordr); err != nil {
+		if err := records.Put([]byte(name+"*order"), ordr); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*preference"), pref); err != nil {
+		if err := records.Put([]byte(name+"*preference"), pref); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*flags"), []byte(flags)); err != nil {
+		if err := records.Put([]byte(name+"*flags"), []byte(flags)); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*service"), []byte(service)); err != nil {
+		if err := records.Put([]byte(name+"*service"), []byte(service)); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*regexp"), []byte(regexp)); err != nil {
+		if err := records.Put([]byte(name+"*regexp"), []byte(regexp)); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*replacement"), []byte(replacement)); err != nil {
+		if err := records.Put([]byte(name+"*replacement"), []byte(replacement)); err != nil {
 			return err
 		}
 
@@ -299,16 +299,16 @@ func (s set) SMIMEA(name string, usage, selector, matchingtype uint8, certificat
 		records := tx.Bucket([]byte("SMIMEA"))
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*usage"), []byte{usage}); err != nil {
+		if err := records.Put([]byte(name+"*usage"), []byte{usage}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*selector"), []byte{selector}); err != nil {
+		if err := records.Put([]byte(name+"*selector"), []byte{selector}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*matching"), []byte{matchingtype}); err != nil {
+		if err := records.Put([]byte(name+"*matching"), []byte{matchingtype}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*certificate"), []byte(certificate)); err != nil {
+		if err := records.Put([]byte(name+"*certificate"), []byte(certificate)); err != nil {
 			return err
 		}
 
@@ -321,13 +321,13 @@ func (s set) SSHFP(name string, algorithm, tpe uint8, fingerprint string) error 
 		records := tx.Bucket([]byte("SSHFP"))
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*algorithm"), []byte{algorithm}); err != nil {
+		if err := records.Put([]byte(name+"*algorithm"), []byte{algorithm}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*type"), []byte{tpe}); err != nil {
+		if err := records.Put([]byte(name+"*type"), []byte{tpe}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*fingerprint"), []byte(fingerprint)); err != nil {
+		if err := records.Put([]byte(name+"*fingerprint"), []byte(fingerprint)); err != nil {
 			return err
 		}
 
@@ -340,16 +340,16 @@ func (s set) TLSA(name string, usage, selector, matchingtype uint8, certificate 
 		records := tx.Bucket([]byte("TLSA"))
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*usage"), []byte{usage}); err != nil {
+		if err := records.Put([]byte(name+"*usage"), []byte{usage}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*selector"), []byte{selector}); err != nil {
+		if err := records.Put([]byte(name+"*selector"), []byte{selector}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*matching"), []byte{matchingtype}); err != nil {
+		if err := records.Put([]byte(name+"*matching"), []byte{matchingtype}); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*certificate"), []byte(certificate)); err != nil {
+		if err := records.Put([]byte(name+"*certificate"), []byte(certificate)); err != nil {
 			return err
 		}
 
@@ -368,13 +368,13 @@ func (s set) URI(name string, priority, weight uint16, target string) error {
 		binary.BigEndian.PutUint16(wei, weight)
 
 		// Write data to bucket
-		if err := records.Put([]byte(name + "*priority"), pri); err != nil {
+		if err := records.Put([]byte(name+"*priority"), pri); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*weight"), wei); err != nil {
+		if err := records.Put([]byte(name+"*weight"), wei); err != nil {
 			return err
 		}
-		if err := records.Put([]byte(name + "*target"), []byte(target)); err != nil {
+		if err := records.Put([]byte(name+"*target"), []byte(target)); err != nil {
 			return err
 		}
 

@@ -96,7 +96,7 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 	case "MX":
 		if err, _ := util.ValidateBody(body, []string{"priority", "host"}, map[string]map[string]string{
 			"priority": {"type": "uint16", "required": "true"},
-			"host": {"type": "string", "required": "true"},
+			"host":     {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
 			return
@@ -106,19 +106,19 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "LOC":
 		if err, _ := util.ValidateBody(body, []string{"version", "size", "horizontal-precision", "vertical-precision", "altitude", "lat-degrees", "lat-minutes", "lat-seconds", "lat-direction", "long-degrees", "long-minutes", "long-seconds", "long-direction"}, map[string]map[string]string{
-			"version": {"type": "uint8", "required": "true"},
-			"size": {"type": "uint8", "required": "true"},
+			"version":              {"type": "uint8", "required": "true"},
+			"size":                 {"type": "uint8", "required": "true"},
 			"horizontal-precision": {"type": "uint8", "required": "true"},
-			"vertical-precision": {"type": "uint8", "required": "true"},
-			"altitude": {"type": "uint32", "required": "true"},
-			"lat-degrees": {"type": "uint8", "required": "true", "min": "0", "max": "90"},
-			"lat-minutes": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"lat-seconds": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"lat-direction": {"type": "string", "required": "true", "oneOf": "N,S"},
-			"long-degrees": {"type": "uint8", "required": "true", "min": "0", "max": "180"},
-			"long-minutes": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"long-seconds": {"type": "uint8", "required": "true", "min": "0", "max": "60"},
-			"long-direction": {"type": "string", "required": "true", "oneOf": "E,W"},
+			"vertical-precision":   {"type": "uint8", "required": "true"},
+			"altitude":             {"type": "uint32", "required": "true"},
+			"lat-degrees":          {"type": "uint8", "required": "true", "min": "0", "max": "90"},
+			"lat-minutes":          {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"lat-seconds":          {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"lat-direction":        {"type": "string", "required": "true", "oneOf": "N,S"},
+			"long-degrees":         {"type": "uint8", "required": "true", "min": "0", "max": "180"},
+			"long-minutes":         {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"long-seconds":         {"type": "uint8", "required": "true", "min": "0", "max": "60"},
+			"long-direction":       {"type": "string", "required": "true", "oneOf": "E,W"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
 			return
@@ -129,9 +129,9 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 	case "SRV":
 		if err, _ := util.ValidateBody(body, []string{"priority", "weight", "port", "target"}, map[string]map[string]string{
 			"priority": {"type": "uint16", "required": "true"},
-			"weight": {"type": "uint16", "required": "true"},
-			"port": {"type": "uint16", "required": "true"},
-			"target": {"type": "string", "required": "true"},
+			"weight":   {"type": "uint16", "required": "true"},
+			"port":     {"type": "uint16", "required": "true"},
+			"target":   {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
 			return
@@ -169,7 +169,7 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "CAA":
 		if err, _ := util.ValidateBody(body, []string{"content", "tag"}, map[string]map[string]string{
-			"tag": {"type": "string", "required": "true"},
+			"tag":     {"type": "string", "required": "true"},
 			"content": {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -188,9 +188,9 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "CERT":
 		if err, _ := util.ValidateBody(body, []string{"c-type", "key-tag", "algorithm", "certificate"}, map[string]map[string]string{
-			"c-type": {"type": "uint16", "required": "true"},
-			"key-tag": {"type": "uint16", "required": "true"},
-			"algorithm": {"type": "uint8", "required": "true"},
+			"c-type":      {"type": "uint16", "required": "true"},
+			"key-tag":     {"type": "uint16", "required": "true"},
+			"algorithm":   {"type": "uint8", "required": "true"},
 			"certificate": {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -201,9 +201,9 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "DNSKEY":
 		if err, _ := util.ValidateBody(body, []string{"flags", "protocol", "algorithm", "public-key"}, map[string]map[string]string{
-			"flags": {"type": "uint16", "required": "true"},
-			"protocol": {"type": "uint8", "required": "true"},
-			"algorithm": {"type": "uint8", "required": "true"},
+			"flags":      {"type": "uint16", "required": "true"},
+			"protocol":   {"type": "uint8", "required": "true"},
+			"algorithm":  {"type": "uint8", "required": "true"},
 			"public-key": {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -214,10 +214,10 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "DS":
 		if err, _ := util.ValidateBody(body, []string{"key-tag", "algorithm", "digest-type", "digest"}, map[string]map[string]string{
-			"key-tag": {"type": "uint16", "required": "true"},
-			"algorithm": {"type": "uint8", "required": "true"},
+			"key-tag":     {"type": "uint16", "required": "true"},
+			"algorithm":   {"type": "uint8", "required": "true"},
 			"digest-type": {"type": "uint8", "required": "true"},
-			"digest": {"type": "string", "required": "true"},
+			"digest":      {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
 			return
@@ -227,11 +227,11 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "NAPTR":
 		if err, _ := util.ValidateBody(body, []string{"order", "preference", "flags", "service", "regexp", "replacement"}, map[string]map[string]string{
-			"order": {"type": "uint16", "required": "true"},
-			"preference": {"type": "uint16", "required": "true"},
-			"flags": {"type": "string", "required": "true"},
-			"service": {"type": "string", "required": "true"},
-			"regexp": {"type": "string", "required": "true"},
+			"order":       {"type": "uint16", "required": "true"},
+			"preference":  {"type": "uint16", "required": "true"},
+			"flags":       {"type": "string", "required": "true"},
+			"service":     {"type": "string", "required": "true"},
+			"regexp":      {"type": "string", "required": "true"},
 			"replacement": {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -242,10 +242,10 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "SMIMEA":
 		if err, _ := util.ValidateBody(body, []string{"usage", "selector", "matching-type", "certificate"}, map[string]map[string]string{
-			"usage": {"type": "uint8", "required": "true"},
-			"selector": {"type": "uint8", "required": "true"},
+			"usage":         {"type": "uint8", "required": "true"},
+			"selector":      {"type": "uint8", "required": "true"},
 			"matching-type": {"type": "uint8", "required": "true"},
-			"certificate": {"type": "string", "required": "true"},
+			"certificate":   {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
 			return
@@ -255,8 +255,8 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "SSHFP":
 		if err, _ := util.ValidateBody(body, []string{"algorithm", "s-type", "fingerprint"}, map[string]map[string]string{
-			"algorithm": {"type": "uint8", "required": "true"},
-			"s-type": {"type": "uint8", "required": "true"},
+			"algorithm":   {"type": "uint8", "required": "true"},
+			"s-type":      {"type": "uint8", "required": "true"},
 			"fingerprint": {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
@@ -267,10 +267,10 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 		}
 	case "TLSA":
 		if err, _ := util.ValidateBody(body, []string{"usage", "selector", "matching-type", "certificate"}, map[string]map[string]string{
-			"usage": {"type": "uint8", "required": "true"},
-			"selector": {"type": "uint8", "required": "true"},
+			"usage":         {"type": "uint8", "required": "true"},
+			"selector":      {"type": "uint8", "required": "true"},
 			"matching-type": {"type": "uint8", "required": "true"},
-			"certificate": {"type": "string", "required": "true"},
+			"certificate":   {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
 			return
@@ -281,8 +281,8 @@ func create(w http.ResponseWriter, r *http.Request, database *bolt.DB) {
 	case "URI":
 		if err, _ := util.ValidateBody(body, []string{"priority", "weight", "target"}, map[string]map[string]string{
 			"priority": {"type": "uint16", "required": "true"},
-			"weight": {"type": "uint16", "required": "true"},
-			"target": {"type": "string", "required": "true"},
+			"weight":   {"type": "uint16", "required": "true"},
+			"target":   {"type": "string", "required": "true"},
 		}); err != "" {
 			util.Responses.Error(w, http.StatusBadRequest, err)
 			return

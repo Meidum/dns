@@ -17,11 +17,11 @@ type User struct {
 
 func NewUser(name, username, password, role string) User {
 	return User{
-		Name: name,
+		Name:     name,
 		Username: username,
 		Password: password,
-		Role: role,
-		Tokens: 0,
+		Role:     role,
+		Tokens:   0,
 	}
 }
 

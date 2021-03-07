@@ -24,10 +24,10 @@ func CreateRole(name, description, allowFilter, denyFilter string, db *bolt.DB) 
 	}
 
 	r := Role{
-		Name: name,
+		Name:        name,
 		Description: description,
-		Allow: allowFilter,
-		Deny: denyFilter,
+		Allow:       allowFilter,
+		Deny:        denyFilter,
 	}
 	data, err := json.Marshal(r)
 	if err != nil {

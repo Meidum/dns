@@ -1,7 +1,8 @@
 package util
 
 var Types = types{}
-type types struct {}
+
+type types struct{}
 
 // Check if value is a string
 func (t types) String(value interface{}) bool {
