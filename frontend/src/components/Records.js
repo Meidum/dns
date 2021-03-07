@@ -252,8 +252,8 @@ export default class extends Component {
                             </EuiPageContentHeaderSection>
                         </EuiPageContentHeader>
                         <EuiPageContentBody>
-                            <EuiButton onClick={this.toggleCreateModal.bind(this)} fill color="ghost">Create a New Record</EuiButton>
-                            <EuiButton onClick={this.refreshRecords.bind(this)} style={{ marginLeft: 20, marginTop: (isMobile()) ? 20 : 0 }} color="ghost">Refresh</EuiButton>
+                            <EuiButton onClick={this.toggleCreateModal.bind(this)} fill color="ghost">Create New</EuiButton>
+                            <EuiButton onClick={this.refreshRecords.bind(this)} style={{ marginLeft: 20, marginTop: (isMobile() && window.innerWidth <  375) ? 20 : 0 }} color="ghost">Refresh</EuiButton>
                             <EuiSpacer/>
                             <EuiButton color="danger" iconType="trash" disabled={this.state.selectedItems.length === 0} onClick={() => {
                                 let successfulFinish = true;

@@ -260,7 +260,7 @@ export default class extends Component {
                             </EuiPageContentHeaderSection>
                         </EuiPageContentHeader>
                         <EuiPageContentBody>
-                            <EuiButton onClick={this.toggleCreateModal.bind(this)} fill color="ghost">Create a New User</EuiButton>
+                            <EuiButton onClick={this.toggleCreateModal.bind(this)} fill color="ghost">Create New</EuiButton>
                             { isMobile() && window.innerWidth > 357 && window.innerWidth < 375 && <EuiSpacer size="s"/> }
                             <EuiButton onClick={this.refreshUsers.bind(this)} style={{ marginLeft: 20, marginTop: (isMobile() && window.innerWidth <  375) ? 20 : 0 }} color="ghost">Refresh</EuiButton>
                             <EuiSpacer/>
