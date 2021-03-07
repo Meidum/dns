@@ -124,7 +124,7 @@ class Base extends Component {
                                 anchorPosition="downRight"
                                 closePopover={this.toggleUserMenuButtonClick.bind(this)}
                                 panelPaddingSize="none">
-                                <div style={{ width: 320 }}>
+                                <div>
                                     <EuiFlexGroup
                                         gutterSize="m"
                                         className="euiHeaderProfile"
