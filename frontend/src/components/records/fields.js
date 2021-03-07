@@ -164,6 +164,8 @@ export default class extends Component {
             case "LOC":
                 return (
                     <>
+                        <EuiSpacer size="l"/>
+                        
                         <h4><b>Latitude</b></h4>
                         <EuiSpacer size="s"/>
                         <EuiFlexGroup style={{ maxWidth: 400 }}>
